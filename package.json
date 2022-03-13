@@ -9,7 +9,7 @@
     "example": "yarn --cwd example",
     "bootstrap": "yarn example && yarn && yarn pods",
     "build": "rimraf ./dist && tsc",
-    "test": "jshint hello.js",
+    "test": "jshint hello.js"
   },
   "repository": {
     "type": "git",
