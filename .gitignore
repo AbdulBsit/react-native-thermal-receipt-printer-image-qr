@@ -39,6 +39,7 @@ yarn-error.log
 
 # BUCK
 buck-out/
+/dist
 \.buckd/
 *.keystore
 !debug.keystore
