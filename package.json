@@ -10,7 +10,6 @@
     "bootstrap": "yarn example && yarn && yarn pods",
     "build": "rimraf ./dist && tsc",
     "test": "jshint hello.js",
-    "postinstall": "tsc"
   },
   "repository": {
     "type": "git",
