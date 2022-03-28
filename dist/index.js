@@ -134,20 +134,14 @@ var USBPrinter = {
     },
     printText: function (text, opts) {
         if (opts === void 0) { opts = {}; }
-        return new Promise(function (resolve, reject) {
-            RNUSBPrinter.printRawData(textTo64Buffer(text, opts), function (error) {
-                return reject(error);
-            });
-            resolve();
+        return RNUSBPrinter.printRawData(textTo64Buffer(text, opts), function (error) {
+            return console.warn(error);
         });
     },
     printBill: function (text, opts) {
         if (opts === void 0) { opts = {}; }
-        return new Promise(function (resolve, reject) {
-            RNUSBPrinter.printRawData(billTo64Buffer(text, opts), function (error) {
-                return reject(error);
-            });
-            resolve();
+        return RNUSBPrinter.printRawData(billTo64Buffer(text, opts), function (error) {
+            return console.warn(error);
         });
     },
     /**
@@ -156,19 +150,13 @@ var USBPrinter = {
      * @param opts
      */
     printImage: function (imgUrl, opts) {
+        var _a, _b, _c;
         if (opts === void 0) { opts = {}; }
         if (Platform.OS === "ios") {
-            return new Promise(function (resolve, reject) {
-                RNUSBPrinter.printImageData(imgUrl, opts, function (error) { return reject(error); });
-                resolve();
-            });
+            RNUSBPrinter.printImageData(imgUrl, opts, function (error) { return console.warn(error); });
         }
         else {
-            return new Promise(function (resolve, reject) {
-                var _a, _b, _c;
-                RNUSBPrinter.printImageData(imgUrl, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return reject(error); });
-                resolve();
-            });
+            RNUSBPrinter.printImageData(imgUrl, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return console.warn(error); });
         }
     },
     /**
@@ -177,19 +165,13 @@ var USBPrinter = {
      * @param opts
      */
     printImageBase64: function (Base64, opts) {
+        var _a, _b, _c;
         if (opts === void 0) { opts = {}; }
         if (Platform.OS === "ios") {
-            return new Promise(function (resolve, reject) {
-                RNUSBPrinter.printImageBase64(Base64, opts, function (error) { return reject(error); });
-                resolve();
-            });
+            RNUSBPrinter.printImageBase64(Base64, opts, function (error) { return console.warn(error); });
         }
         else {
-            return new Promise(function (resolve, reject) {
-                var _a, _b, _c;
-                RNUSBPrinter.printImageBase64(Base64, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return reject(error); });
-                resolve();
-            });
+            RNUSBPrinter.printImageBase64(Base64, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return console.warn(error); });
         }
     },
     /**
@@ -198,14 +180,10 @@ var USBPrinter = {
      */
     printRaw: function (text) {
         if (Platform.OS === "ios") {
-            return Promise.resolve();
         }
         else {
-            return new Promise(function (resolve, reject) {
-                RNUSBPrinter.printRawData(text, function (error) {
-                    return reject(error);
-                });
-                resolve();
+            RNUSBPrinter.printRawData(text, function (error) {
+                return console.warn(error);
             });
         }
     },
@@ -216,12 +194,9 @@ var USBPrinter = {
      */
     printColumnsText: function (texts, columnWidth, columnAliment, columnStyle, opts) {
         if (opts === void 0) { opts = {}; }
-        return new Promise(function (resolve, reject) {
-            var result = processColumnText(texts, columnWidth, columnAliment, columnStyle);
-            RNUSBPrinter.printRawData(textTo64Buffer(result, opts), function (error) {
-                return reject(error);
-            });
-            resolve();
+        var result = processColumnText(texts, columnWidth, columnAliment, columnStyle);
+        RNUSBPrinter.printRawData(textTo64Buffer(result, opts), function (error) {
+            return console.warn(error);
         });
     },
 };
@@ -250,37 +225,25 @@ var BLEPrinter = {
     printText: function (text, opts) {
         if (opts === void 0) { opts = {}; }
         if (Platform.OS === "ios") {
-            return new Promise(function (resolve, reject) {
-                var processedText = textPreprocessingIOS(text, false, false);
-                RNBLEPrinter.printRawData(processedText.text, processedText.opts, function (error) { return reject(error); });
-                resolve();
-            });
+            var processedText = textPreprocessingIOS(text, false, false);
+            RNBLEPrinter.printRawData(processedText.text, processedText.opts, function (error) { return console.warn(error); });
         }
         else {
-            return new Promise(function (resolve, reject) {
-                RNBLEPrinter.printRawData(textTo64Buffer(text, opts), function (error) {
-                    return reject(error);
-                });
-                resolve();
+            RNBLEPrinter.printRawData(textTo64Buffer(text, opts), function (error) {
+                return console.warn(error);
             });
         }
     },
     printBill: function (text, opts) {
+        var _a, _b;
         if (opts === void 0) { opts = {}; }
         if (Platform.OS === "ios") {
-            return new Promise(function (resolve, reject) {
-                var _a, _b;
-                var processedText = textPreprocessingIOS(text, (_a = opts === null || opts === void 0 ? void 0 : opts.cut) !== null && _a !== void 0 ? _a : true, (_b = opts.beep) !== null && _b !== void 0 ? _b : true);
-                RNBLEPrinter.printRawData(processedText.text, processedText.opts, function (error) { return reject(error); });
-                resolve();
-            });
+            var processedText = textPreprocessingIOS(text, (_a = opts === null || opts === void 0 ? void 0 : opts.cut) !== null && _a !== void 0 ? _a : true, (_b = opts.beep) !== null && _b !== void 0 ? _b : true);
+            RNBLEPrinter.printRawData(processedText.text, processedText.opts, function (error) { return console.warn(error); });
         }
         else {
-            return new Promise(function (resolve, reject) {
-                RNBLEPrinter.printRawData(billTo64Buffer(text, opts), function (error) {
-                    return reject(error);
-                });
-                resolve();
+            RNBLEPrinter.printRawData(billTo64Buffer(text, opts), function (error) {
+                return console.warn(error);
             });
         }
     },
@@ -290,22 +253,16 @@ var BLEPrinter = {
      * @param opts
      */
     printImage: function (imgUrl, opts) {
+        var _a, _b, _c;
         if (opts === void 0) { opts = {}; }
         if (Platform.OS === "ios") {
             /**
              * just development
              */
-            return new Promise(function (resolve, reject) {
-                RNBLEPrinter.printImageData(imgUrl, opts, function (error) { return reject(error); });
-                resolve();
-            });
+            RNBLEPrinter.printImageData(imgUrl, opts, function (error) { return console.warn(error); });
         }
         else {
-            return new Promise(function (resolve, reject) {
-                var _a, _b, _c;
-                RNBLEPrinter.printImageData(imgUrl, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return reject(error); });
-                resolve();
-            });
+            RNBLEPrinter.printImageData(imgUrl, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return console.warn(error); });
         }
     },
     /**
@@ -314,25 +271,19 @@ var BLEPrinter = {
      * @param opts
      */
     printImageBase64: function (Base64, opts) {
+        var _a, _b, _c;
         if (opts === void 0) { opts = {}; }
         if (Platform.OS === "ios") {
             /**
-          * just development
-          */
-            return new Promise(function (resolve, reject) {
-                RNBLEPrinter.printImageBase64(Base64, opts, function (error) { return reject(error); });
-                resolve();
-            });
+             * just development
+             */
+            RNBLEPrinter.printImageBase64(Base64, opts, function (error) { return console.warn(error); });
         }
         else {
             /**
-          * just development
-          */
-            return new Promise(function (resolve, reject) {
-                var _a, _b, _c;
-                RNBLEPrinter.printImageBase64(Base64, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return reject(error); });
-                resolve();
-            });
+             * just development
+             */
+            RNBLEPrinter.printImageBase64(Base64, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return console.warn(error); });
         }
     },
     /**
@@ -341,14 +292,10 @@ var BLEPrinter = {
      */
     printRaw: function (text) {
         if (Platform.OS === "ios") {
-            return Promise.resolve();
         }
         else {
-            return new Promise(function (resolve, reject) {
-                RNBLEPrinter.printRawData(text, function (error) {
-                    return reject(error);
-                });
-                resolve();
+            RNBLEPrinter.printRawData(text, function (error) {
+                return console.warn(error);
             });
         }
     },
@@ -361,18 +308,12 @@ var BLEPrinter = {
         if (opts === void 0) { opts = {}; }
         var result = processColumnText(texts, columnWidth, columnAliment, columnStyle);
         if (Platform.OS === "ios") {
-            return new Promise(function (resolve, reject) {
-                var processedText = textPreprocessingIOS(result, false, false);
-                RNBLEPrinter.printRawData(processedText.text, processedText.opts, function (error) { return reject(error); });
-                resolve();
-            });
+            var processedText = textPreprocessingIOS(result, false, false);
+            RNBLEPrinter.printRawData(processedText.text, processedText.opts, function (error) { return console.warn(error); });
         }
         else {
-            return new Promise(function (resolve, reject) {
-                RNBLEPrinter.printRawData(textTo64Buffer(result, opts), function (error) {
-                    return reject(error);
-                });
-                resolve();
+            RNBLEPrinter.printRawData(textTo64Buffer(result, opts), function (error) {
+                return console.warn(error);
             });
         }
     },
@@ -418,37 +359,25 @@ var NetPrinter = {
     printText: function (text, opts) {
         if (opts === void 0) { opts = {}; }
         if (Platform.OS === "ios") {
-            return new Promise(function (resolve, reject) {
-                var processedText = textPreprocessingIOS(text, false, false);
-                RNNetPrinter.printRawData(processedText.text, processedText.opts, function (error) { return reject(error); });
-                resolve();
-            });
+            var processedText = textPreprocessingIOS(text, false, false);
+            RNNetPrinter.printRawData(processedText.text, processedText.opts, function (error) { return console.warn(error); });
         }
         else {
-            return new Promise(function (resolve, reject) {
-                RNNetPrinter.printRawData(textTo64Buffer(text, opts), function (error) {
-                    return reject(error);
-                });
-                resolve();
+            RNNetPrinter.printRawData(textTo64Buffer(text, opts), function (error) {
+                return console.warn(error);
             });
         }
     },
     printBill: function (text, opts) {
+        var _a, _b;
         if (opts === void 0) { opts = {}; }
         if (Platform.OS === "ios") {
-            return new Promise(function (resolve, reject) {
-                var _a, _b;
-                var processedText = textPreprocessingIOS(text, (_a = opts === null || opts === void 0 ? void 0 : opts.cut) !== null && _a !== void 0 ? _a : true, (_b = opts.beep) !== null && _b !== void 0 ? _b : true);
-                RNNetPrinter.printRawData(processedText.text, processedText.opts, function (error) { return reject(error); });
-                resolve();
-            });
+            var processedText = textPreprocessingIOS(text, (_a = opts === null || opts === void 0 ? void 0 : opts.cut) !== null && _a !== void 0 ? _a : true, (_b = opts.beep) !== null && _b !== void 0 ? _b : true);
+            RNNetPrinter.printRawData(processedText.text, processedText.opts, function (error) { return console.warn(error); });
         }
         else {
-            return new Promise(function (resolve, reject) {
-                RNNetPrinter.printRawData(billTo64Buffer(text, opts), function (error) {
-                    return reject(error);
-                });
-                resolve();
+            RNNetPrinter.printRawData(billTo64Buffer(text, opts), function (error) {
+                return console.warn(error);
             });
         }
     },
@@ -458,19 +387,13 @@ var NetPrinter = {
      * @param opts
      */
     printImage: function (imgUrl, opts) {
+        var _a, _b, _c;
         if (opts === void 0) { opts = {}; }
         if (Platform.OS === "ios") {
-            return new Promise(function (resolve, reject) {
-                RNNetPrinter.printImageData(imgUrl, opts, function (error) { return reject(error); });
-                resolve();
-            });
+            RNNetPrinter.printImageData(imgUrl, opts, function (error) { return console.warn(error); });
         }
         else {
-            return new Promise(function (resolve, reject) {
-                var _a, _b, _c;
-                RNNetPrinter.printImageData(imgUrl, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return reject(error); });
-                resolve();
-            });
+            RNNetPrinter.printImageData(imgUrl, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return console.warn(error); });
         }
     },
     /**
@@ -479,19 +402,13 @@ var NetPrinter = {
      * @param opts
      */
     printImageBase64: function (Base64, opts) {
+        var _a, _b, _c;
         if (opts === void 0) { opts = {}; }
         if (Platform.OS === "ios") {
-            return new Promise(function (resolve, reject) {
-                RNNetPrinter.printImageBase64(Base64, opts, function (error) { return reject(error); });
-                resolve();
-            });
+            RNNetPrinter.printImageBase64(Base64, opts, function (error) { return console.warn(error); });
         }
         else {
-            return new Promise(function (resolve, reject) {
-                var _a, _b, _c;
-                RNNetPrinter.printImageBase64(Base64, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return reject(error); });
-                resolve();
-            });
+            RNNetPrinter.printImageBase64(Base64, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return console.warn(error); });
         }
     },
     /**
@@ -500,14 +417,10 @@ var NetPrinter = {
      */
     printRaw: function (text) {
         if (Platform.OS === "ios") {
-            return Promise.resolve();
         }
         else {
-            return new Promise(function (resolve, reject) {
-                RNNetPrinter.printRawData(text, function (error) {
-                    return reject(error);
-                });
-                resolve();
+            RNNetPrinter.printRawData(text, function (error) {
+                return console.warn(error);
             });
         }
     },
@@ -521,18 +434,12 @@ var NetPrinter = {
         if (opts === void 0) { opts = {}; }
         var result = processColumnText(texts, columnWidth, columnAliment, columnStyle);
         if (Platform.OS === "ios") {
-            return new Promise(function (resolve, reject) {
-                var processedText = textPreprocessingIOS(result, false, false);
-                RNNetPrinter.printRawData(processedText.text, processedText.opts, function (error) { return reject(error); });
-                resolve();
-            });
+            var processedText = textPreprocessingIOS(result, false, false);
+            RNNetPrinter.printRawData(processedText.text, processedText.opts, function (error) { return console.warn(error); });
         }
         else {
-            return new Promise(function (resolve, reject) {
-                RNNetPrinter.printRawData(textTo64Buffer(result, opts), function (error) {
-                    return reject(error);
-                });
-                resolve();
+            RNNetPrinter.printRawData(textTo64Buffer(result, opts), function (error) {
+                return console.warn(error);
             });
         }
     },
