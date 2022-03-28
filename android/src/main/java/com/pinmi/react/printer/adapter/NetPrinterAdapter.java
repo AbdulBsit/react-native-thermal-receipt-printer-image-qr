@@ -258,7 +258,7 @@ public class NetPrinterAdapter implements PrinterAdapter {
 
 
     @Override
-    public void printImageData(final String imageUrl, int imageWidth, int imageHeight, Callback errorCallback) {
+    public void printImageData(final String imageUrl, int imageWidth, int imageHeight,Boolean printNextLine, Callback errorCallback) {
         final Bitmap bitmapImage = getBitmapFromURL(imageUrl);
 
         if (bitmapImage == null) {
@@ -295,8 +295,10 @@ public class NetPrinterAdapter implements PrinterAdapter {
                 // Do a line feed, if not the printing will resume on the same line
                 printerOutputStream.write(LINE_FEED);
             }
-            printerOutputStream.write(SET_LINE_SPACE_32);
-            printerOutputStream.write(LINE_FEED);
+            if(printNextLine){
+                printerOutputStream.write(SET_LINE_SPACE_32);
+                printerOutputStream.write(LINE_FEED);
+            }
 
             printerOutputStream.flush();
         } catch (IOException e) {
@@ -306,7 +308,7 @@ public class NetPrinterAdapter implements PrinterAdapter {
     }
 
     @Override
-    public void printImageBase64(final Bitmap bitmapImage, int imageWidth, int imageHeight, Callback errorCallback) {
+    public void printImageBase64(final Bitmap bitmapImage, int imageWidth, int imageHeight,Boolean printNextLine, Callback errorCallback) {
         if (bitmapImage == null) {
             errorCallback.invoke("image not found");
             return;
@@ -342,8 +344,10 @@ public class NetPrinterAdapter implements PrinterAdapter {
                 // Do a line feed, if not the printing will resume on the same line
                 printerOutputStream.write(LINE_FEED);
             }
-            printerOutputStream.write(SET_LINE_SPACE_32);
-            printerOutputStream.write(LINE_FEED);
+            if(printNextLine){
+                printerOutputStream.write(SET_LINE_SPACE_32);
+                printerOutputStream.write(LINE_FEED);
+            }
 
             printerOutputStream.flush();
         } catch (IOException e) {

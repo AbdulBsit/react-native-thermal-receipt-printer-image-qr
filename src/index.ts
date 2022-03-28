@@ -25,6 +25,7 @@ export interface PrinterImageOptions {
   beep?: boolean;
   cut?: boolean;
   tailingLine?: boolean;
+  printNextLine?: boolean,
   encoding?: string;
   imageWidth?: number,
   imageHeight?: number,
@@ -175,7 +176,7 @@ const USBPrinter = {
       })
     } else {
       return new Promise((resolve, reject) => {
-        RNUSBPrinter.printImageData(imgUrl, opts?.imageWidth ?? 0, opts?.imageHeight ?? 0, (error: Error) => reject(error));
+        RNUSBPrinter.printImageData(imgUrl, opts?.imageWidth ?? 0, opts?.imageHeight ?? 0, opts?.printNextLine ?? true, (error: Error) => reject(error));
         resolve()
       })
     }
@@ -193,7 +194,7 @@ const USBPrinter = {
       })
     } else {
       return new Promise((resolve, reject) => {
-        RNUSBPrinter.printImageBase64(Base64, opts?.imageWidth ?? 0, opts?.imageHeight ?? 0, (error: Error) => reject(error));
+        RNUSBPrinter.printImageBase64(Base64, opts?.imageWidth ?? 0, opts?.imageHeight ?? 0, opts?.printNextLine ?? true, (error: Error) => reject(error));
         resolve()
       })
     }
@@ -320,7 +321,8 @@ const BLEPrinter = {
       })
     } else {
       return new Promise((resolve, reject) => {
-        RNBLEPrinter.printImageData(imgUrl, opts?.imageWidth ?? 0, opts?.imageHeight ?? 0, (error: Error) => reject(error));
+        RNBLEPrinter.printImageData(imgUrl, opts?.imageWidth ?? 0, opts?.imageHeight ?? 0,
+          opts?.printNextLine ?? true, (error: Error) => reject(error));
         resolve()
       })
     }
@@ -333,18 +335,18 @@ const BLEPrinter = {
   printImageBase64: (Base64: string, opts: PrinterImageOptions = {}): Promise<void> => {
     if (Platform.OS === "ios") {
       /**
-       * just development
-       */
+    * just development
+    */
       return new Promise((resolve, reject) => {
         RNBLEPrinter.printImageBase64(Base64, opts, (error: Error) => reject(error));
         resolve()
       })
     } else {
       /**
-       * just development
-       */
+    * just development
+    */
       return new Promise((resolve, reject) => {
-        RNBLEPrinter.printImageBase64(Base64, opts?.imageWidth ?? 0, opts?.imageHeight ?? 0, (error: Error) => reject(error));
+        RNBLEPrinter.printImageBase64(Base64, opts?.imageWidth ?? 0, opts?.imageHeight ?? 0, opts?.printNextLine ?? true, (error: Error) => reject(error));
         resolve()
       })
     }
@@ -485,7 +487,7 @@ const NetPrinter = {
       })
     } else {
       return new Promise((resolve, reject) => {
-        RNNetPrinter.printImageData(imgUrl, opts?.imageWidth ?? 0, opts?.imageHeight ?? 0, (error: Error) => reject(error));
+        RNNetPrinter.printImageData(imgUrl, opts?.imageWidth ?? 0, opts?.imageHeight ?? 0, opts?.printNextLine ?? true, (error: Error) => reject(error));
         resolve()
       })
     }
@@ -503,7 +505,7 @@ const NetPrinter = {
       })
     } else {
       return new Promise((resolve, reject) => {
-        RNNetPrinter.printImageBase64(Base64, opts?.imageWidth ?? 0, opts?.imageHeight ?? 0, (error: Error) => reject(error));
+        RNNetPrinter.printImageBase64(Base64, opts?.imageWidth ?? 0, opts?.imageHeight ?? 0, opts?.printNextLine ?? true, (error: Error) => reject(error));
         resolve()
       })
     }

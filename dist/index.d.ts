@@ -14,6 +14,7 @@ export interface PrinterImageOptions {
     beep?: boolean;
     cut?: boolean;
     tailingLine?: boolean;
+    printNextLine?: boolean;
     encoding?: string;
     imageWidth?: number;
     imageHeight?: number;

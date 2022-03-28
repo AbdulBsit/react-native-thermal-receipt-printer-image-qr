@@ -165,8 +165,8 @@ var USBPrinter = {
         }
         else {
             return new Promise(function (resolve, reject) {
-                var _a, _b;
-                RNUSBPrinter.printImageData(imgUrl, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, function (error) { return reject(error); });
+                var _a, _b, _c;
+                RNUSBPrinter.printImageData(imgUrl, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return reject(error); });
                 resolve();
             });
         }
@@ -186,8 +186,8 @@ var USBPrinter = {
         }
         else {
             return new Promise(function (resolve, reject) {
-                var _a, _b;
-                RNUSBPrinter.printImageBase64(Base64, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, function (error) { return reject(error); });
+                var _a, _b, _c;
+                RNUSBPrinter.printImageBase64(Base64, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return reject(error); });
                 resolve();
             });
         }
@@ -302,8 +302,8 @@ var BLEPrinter = {
         }
         else {
             return new Promise(function (resolve, reject) {
-                var _a, _b;
-                RNBLEPrinter.printImageData(imgUrl, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, function (error) { return reject(error); });
+                var _a, _b, _c;
+                RNBLEPrinter.printImageData(imgUrl, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return reject(error); });
                 resolve();
             });
         }
@@ -317,8 +317,8 @@ var BLEPrinter = {
         if (opts === void 0) { opts = {}; }
         if (Platform.OS === "ios") {
             /**
-             * just development
-             */
+          * just development
+          */
             return new Promise(function (resolve, reject) {
                 RNBLEPrinter.printImageBase64(Base64, opts, function (error) { return reject(error); });
                 resolve();
@@ -326,11 +326,11 @@ var BLEPrinter = {
         }
         else {
             /**
-             * just development
-             */
+          * just development
+          */
             return new Promise(function (resolve, reject) {
-                var _a, _b;
-                RNBLEPrinter.printImageBase64(Base64, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, function (error) { return reject(error); });
+                var _a, _b, _c;
+                RNBLEPrinter.printImageBase64(Base64, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return reject(error); });
                 resolve();
             });
         }
@@ -467,8 +467,8 @@ var NetPrinter = {
         }
         else {
             return new Promise(function (resolve, reject) {
-                var _a, _b;
-                RNNetPrinter.printImageData(imgUrl, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, function (error) { return reject(error); });
+                var _a, _b, _c;
+                RNNetPrinter.printImageData(imgUrl, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return reject(error); });
                 resolve();
             });
         }
@@ -488,8 +488,8 @@ var NetPrinter = {
         }
         else {
             return new Promise(function (resolve, reject) {
-                var _a, _b;
-                RNNetPrinter.printImageBase64(Base64, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, function (error) { return reject(error); });
+                var _a, _b, _c;
+                RNNetPrinter.printImageBase64(Base64, (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !== null && _a !== void 0 ? _a : 0, (_b = opts === null || opts === void 0 ? void 0 : opts.imageHeight) !== null && _b !== void 0 ? _b : 0, (_c = opts === null || opts === void 0 ? void 0 : opts.printNextLine) !== null && _c !== void 0 ? _c : true, function (error) { return reject(error); });
                 resolve();
             });
         }

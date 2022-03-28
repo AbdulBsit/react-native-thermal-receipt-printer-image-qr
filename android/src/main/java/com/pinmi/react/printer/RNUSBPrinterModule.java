@@ -36,50 +36,51 @@ public class RNUSBPrinterModule extends ReactContextBaseJavaModule implements RN
     @Override
     public void init(Callback successCallback, Callback errorCallback) {
         this.adapter = USBPrinterAdapter.getInstance();
-        this.adapter.init(reactContext,  successCallback, errorCallback);
+        this.adapter.init(reactContext, successCallback, errorCallback);
     }
 
     @ReactMethod
     @Override
-    public void closeConn()  {
+    public void closeConn() {
         adapter.closeConnectionIfExists();
     }
 
     @ReactMethod
     @Override
-    public void getDeviceList(Callback successCallback, Callback errorCallback)  {
+    public void getDeviceList(Callback successCallback, Callback errorCallback) {
         List<PrinterDevice> printerDevices = adapter.getDeviceList(errorCallback);
         WritableArray pairedDeviceList = Arguments.createArray();
-        if(printerDevices.size() > 0) {
+        if (printerDevices.size() > 0) {
             for (PrinterDevice printerDevice : printerDevices) {
                 pairedDeviceList.pushMap(printerDevice.toRNWritableMap());
             }
             successCallback.invoke(pairedDeviceList);
-        }else{
+        } else {
             errorCallback.invoke("No Device Found");
         }
     }
 
     @ReactMethod
     @Override
-    public void printRawData(String base64Data, Callback errorCallback){
+    public void printRawData(String base64Data, Callback errorCallback) {
         adapter.printRawData(base64Data, errorCallback);
     }
 
     @ReactMethod
     @Override
-    public void printImageData(String imageUrl, int imageWidth, int imageHeight, Callback errorCallback) {
-        adapter.printImageData(imageUrl, imageWidth, imageHeight,errorCallback);
+    public void printImageData(String imageUrl, int imageWidth, int imageHeight, Boolean printNextLine,
+            Callback errorCallback) {
+        adapter.printImageData(imageUrl, imageWidth, imageHeight, printNextLine, errorCallback);
     }
 
     @ReactMethod
     @Override
-    public void printImageBase64(String base64, int imageWidth, int imageHeight, Callback errorCallback) {
+    public void printImageBase64(String base64, int imageWidth, int imageHeight, Boolean printNextLine, Callback errorCallback) {
         // String imageBase64 = "data:image/png;base64," + imageUrl;
         // String base64ImageProcessed = imageUrl.split(",")[1];
         byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        adapter.printImageBase64(decodedByte, imageWidth, imageHeight,errorCallback);
+        adapter.printImageBase64(decodedByte, imageWidth, imageHeight,printNextLine, errorCallback);
     }
 
     @ReactMethod
