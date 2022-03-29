@@ -236,7 +236,7 @@ public class USBPrinterAdapter implements PrinterAdapter {
                     int b = mUsbDeviceConnection.bulkTransfer(mEndPoint, bytes, bytes.length, 100000);
                     successCallback.invoke("Done");
                     Log.i(LOG_TAG, "Return Status: b-->" + b);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     errorCallback.invoke("Fail to print, Check your Device Connection");
                 }
                 }
@@ -316,7 +316,7 @@ public class USBPrinterAdapter implements PrinterAdapter {
                     mUsbDeviceConnection.bulkTransfer(mEndPoint, LINE_FEED, LINE_FEED.length, 100000);
                 }
                 successCallback.invoke("Done");
-            } catch (IOException e) {
+            } catch (Exception e) {
                 errorCallback.invoke("Fail to print, Check your Device Connection");
             }
         }else {
@@ -373,7 +373,7 @@ public class USBPrinterAdapter implements PrinterAdapter {
                     mUsbDeviceConnection.bulkTransfer(mEndPoint, LINE_FEED, LINE_FEED.length, 100000);
                 }
                 successCallback.invoke("Done");
-            } catch (IOException e) {
+            } catch (Exception e) {
                 errorCallback.invoke("Fail to print, Check your Device Connection");
             }
         }else {
