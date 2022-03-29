@@ -212,7 +212,7 @@ public class NetPrinterAdapter implements PrinterAdapter {
     }
 
     @Override
-    public void printRawData(String rawBase64Data, Callback errorCallback) {
+    public void printRawData(String rawBase64Data,Callback successCallback, Callback errorCallback) {
         if (this.mSocket == null) {
             errorCallback.invoke("Net connection is not built, may be you forgot to connectPrinter");
             return;
@@ -228,7 +228,9 @@ public class NetPrinterAdapter implements PrinterAdapter {
                     OutputStream printerOutputStream = socket.getOutputStream();
                     printerOutputStream.write(bytes, 0, bytes.length);
                     printerOutputStream.flush();
+                    successCallback.invoke("Done");
                 } catch (IOException e) {
+                    errorCallback.invoke("Fail to print, Check your Device Connection");
                     Log.e(LOG_TAG, "failed to print data" + rawData);
                     e.printStackTrace();
                 }
@@ -258,7 +260,10 @@ public class NetPrinterAdapter implements PrinterAdapter {
 
 
     @Override
-    public void printImageData(final String imageUrl, int imageWidth, int imageHeight,Boolean printNextLine, Callback errorCallback) {
+    public void printImageData(final String imageUrl, int imageWidth, int imageHeight,
+                               Boolean printNextLine,
+                               Callback successCallback,
+                               Callback errorCallback) {
         final Bitmap bitmapImage = getBitmapFromURL(imageUrl);
 
         if (bitmapImage == null) {
@@ -301,14 +306,19 @@ public class NetPrinterAdapter implements PrinterAdapter {
             }
 
             printerOutputStream.flush();
+            successCallback.invoke("Done");
         } catch (IOException e) {
+            errorCallback.invoke("Fail to print, Check your Device Connection");
             Log.e(LOG_TAG, "failed to print data");
             e.printStackTrace();
         }
     }
 
     @Override
-    public void printImageBase64(final Bitmap bitmapImage, int imageWidth, int imageHeight,Boolean printNextLine, Callback errorCallback) {
+    public void printImageBase64(final Bitmap bitmapImage, int imageWidth, int imageHeight,
+                                 Boolean printNextLine,
+                                 Callback successCallback,
+                                 Callback errorCallback) {
         if (bitmapImage == null) {
             errorCallback.invoke("image not found");
             return;
@@ -350,7 +360,9 @@ public class NetPrinterAdapter implements PrinterAdapter {
             }
 
             printerOutputStream.flush();
+            successCallback.invoke("Done");
         } catch (IOException e) {
+            errorCallback.invoke("Fail to print, Check your Device Connection");
             Log.e(LOG_TAG, "failed to print data");
             e.printStackTrace();
         }

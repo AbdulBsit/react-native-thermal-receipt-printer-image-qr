@@ -16,13 +16,14 @@ public interface RNPrinterModule {
     public void getDeviceList(Callback successCallback, Callback errorCallback);
     
     @ReactMethod
-    public void printRawData(String base64Data, Callback errorCallback);
+    public void printRawData(String base64Data, Callback successCallback,Callback errorCallback);
 
     @ReactMethod
     public void printImageData(String imageUrl, int imageWidth, int imageHeight, Boolean printNextLine,
+                               Callback successCallback,
             Callback errorCallback);
 
     @ReactMethod
     public void printImageBase64(String base64, int imageWidth, int imageHeight, Boolean printNextLine,
-            Callback errorCallback);
+                                 Callback successCallback,Callback errorCallback);
 }

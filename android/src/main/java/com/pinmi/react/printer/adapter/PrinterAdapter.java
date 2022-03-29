@@ -24,11 +24,11 @@ public interface PrinterAdapter {
 
     public void closeConnectionIfExists();
 
-    public void printRawData(String rawBase64Data, Callback errorCallback);
+    public void printRawData(String rawBase64Data, Callback successCallback, Callback errorCallback);
 
     public void printImageData(String imageUrl, int imageWidth, int imageHeight, Boolean printNextLine,
-            Callback errorCallback);
+                               Callback successCallback,      Callback errorCallback);
 
     public void printImageBase64(Bitmap imageUrl, int imageWidth, int imageHeight, Boolean printNextLine,
-            Callback errorCallback);
+                                 Callback successCallback,  Callback errorCallback);
 }

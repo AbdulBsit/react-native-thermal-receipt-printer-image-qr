@@ -168,7 +168,7 @@ public class BLEPrinterAdapter implements PrinterAdapter {
     }
 
     @Override
-    public void printRawData(String rawBase64Data, Callback errorCallback) {
+    public void printRawData(String rawBase64Data,Callback successCallback, Callback errorCallback) {
         if (this.mBluetoothSocket == null) {
             errorCallback.invoke("bluetooth connection is not built, may be you forgot to connectPrinter");
             return;
@@ -184,7 +184,9 @@ public class BLEPrinterAdapter implements PrinterAdapter {
                     OutputStream printerOutputStream = socket.getOutputStream();
                     printerOutputStream.write(bytes, 0, bytes.length);
                     printerOutputStream.flush();
+                    successCallback.invoke("Done");
                 } catch (IOException e) {
+                    errorCallback.invoke("Fail to print, Check your Device Connection");
                     Log.e(LOG_TAG, "failed to print data" + rawData);
                     e.printStackTrace();
                 }
@@ -214,7 +216,7 @@ public class BLEPrinterAdapter implements PrinterAdapter {
 
     @Override
     public void printImageData(String imageUrl, int imageWidth, int imageHeight, Boolean printNextLine,
-            Callback errorCallback) {
+                               Callback successCallback,   Callback errorCallback) {
         final Bitmap bitmapImage = getBitmapFromURL(imageUrl);
 
         if (bitmapImage == null) {
@@ -258,7 +260,9 @@ public class BLEPrinterAdapter implements PrinterAdapter {
             }
 
             printerOutputStream.flush();
+            successCallback.invoke("Done");
         } catch (IOException e) {
+            errorCallback.invoke("Fail to print, Check your Device Connection");
             Log.e(LOG_TAG, "failed to print data");
             e.printStackTrace();
         }
@@ -266,7 +270,7 @@ public class BLEPrinterAdapter implements PrinterAdapter {
 
     @Override
     public void printImageBase64(final Bitmap bitmapImage, int imageWidth, int imageHeight, Boolean printNextLine,
-            Callback errorCallback) {
+                                 Callback successCallback,  Callback errorCallback) {
         if (bitmapImage == null) {
             errorCallback.invoke("image not found");
             return;
@@ -307,7 +311,9 @@ public class BLEPrinterAdapter implements PrinterAdapter {
                 printerOutputStream.write(LINE_FEED);
             }
             printerOutputStream.flush();
+            successCallback.invoke("Done");
         } catch (IOException e) {
+            errorCallback.invoke("Fail to print, Check your Device Connection");
             Log.e(LOG_TAG, "failed to print data");
             e.printStackTrace();
         }

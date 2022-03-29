@@ -16,7 +16,6 @@ export interface PrinterImageOptions {
     tailingLine?: boolean;
     encoding?: string;
     imageWidth?: number;
-    printNextLine?: boolean;
     imageHeight?: number;
     printerWidthType?: PrinterWidth;
     paddingX?: number;
@@ -44,93 +43,93 @@ declare const USBPrinter: {
     getDeviceList: () => Promise<IUSBPrinter[]>;
     connectPrinter: (vendorId: string, productId: string) => Promise<IUSBPrinter>;
     closeConn: () => Promise<void>;
-    printText: (text: string, opts?: PrinterOptions) => void;
-    printBill: (text: string, opts?: PrinterOptions) => void;
+    printText: (text: string, opts?: PrinterOptions) => Promise<void>;
+    printBill: (text: string, opts?: PrinterOptions) => Promise<void>;
     /**
      * image url
      * @param imgUrl
      * @param opts
      */
-    printImage: (imgUrl: string, opts?: PrinterImageOptions) => void;
+    printImage: (imgUrl: string, opts?: PrinterImageOptions) => Promise<void>;
     /**
      * base 64 string
      * @param Base64
      * @param opts
      */
-    printImageBase64: (Base64: string, opts?: PrinterImageOptions) => void;
+    printImageBase64: (Base64: string, opts?: PrinterImageOptions) => Promise<void>;
     /**
      * android print with encoder
      * @param text
      */
-    printRaw: (text: string) => void;
+    printRaw: (text: string) => Promise<void>;
     /**
      * `columnWidth`
      * 80mm => 46 character
      * 58mm => 30 character
      */
-    printColumnsText: (texts: string[], columnWidth: number[], columnAliment: (ColumnAliment)[], columnStyle: string[], opts?: PrinterOptions) => void;
+    printColumnsText: (texts: string[], columnWidth: number[], columnAliment: (ColumnAliment)[], columnStyle: string[], opts?: PrinterOptions) => Promise<void>;
 };
 declare const BLEPrinter: {
     init: () => Promise<void>;
     getDeviceList: () => Promise<IBLEPrinter[]>;
     connectPrinter: (inner_mac_address: string) => Promise<IBLEPrinter>;
     closeConn: () => Promise<void>;
-    printText: (text: string, opts?: PrinterOptions) => void;
-    printBill: (text: string, opts?: PrinterOptions) => void;
+    printText: (text: string, opts?: PrinterOptions) => Promise<void>;
+    printBill: (text: string, opts?: PrinterOptions) => Promise<void>;
     /**
      * image url
      * @param imgUrl
      * @param opts
      */
-    printImage: (imgUrl: string, opts?: PrinterImageOptions) => void;
+    printImage: (imgUrl: string, opts?: PrinterImageOptions) => Promise<void>;
     /**
      * base 64 string
      * @param Base64
      * @param opts
      */
-    printImageBase64: (Base64: string, opts?: PrinterImageOptions) => void;
+    printImageBase64: (Base64: string, opts?: PrinterImageOptions) => Promise<void>;
     /**
      * android print with encoder
      * @param text
      */
-    printRaw: (text: string) => void;
+    printRaw: (text: string) => Promise<void>;
     /**
      * `columnWidth`
      * 80mm => 46 character
      * 58mm => 30 character
      */
-    printColumnsText: (texts: string[], columnWidth: number[], columnAliment: (ColumnAliment)[], columnStyle: string[], opts?: PrinterOptions) => void;
+    printColumnsText: (texts: string[], columnWidth: number[], columnAliment: (ColumnAliment)[], columnStyle: string[], opts?: PrinterOptions) => Promise<void>;
 };
 declare const NetPrinter: {
     init: () => Promise<void>;
     getDeviceList: () => Promise<INetPrinter[]>;
     connectPrinter: (host: string, port: number, timeout?: number | undefined) => Promise<INetPrinter>;
     closeConn: () => Promise<void>;
-    printText: (text: string, opts?: {}) => void;
-    printBill: (text: string, opts?: PrinterOptions) => void;
+    printText: (text: string, opts?: {}) => Promise<void>;
+    printBill: (text: string, opts?: PrinterOptions) => Promise<void>;
     /**
      * image url
      * @param imgUrl
      * @param opts
      */
-    printImage: (imgUrl: string, opts?: PrinterImageOptions) => void;
+    printImage: (imgUrl: string, opts?: PrinterImageOptions) => Promise<void>;
     /**
      * base 64 string
      * @param Base64
      * @param opts
      */
-    printImageBase64: (Base64: string, opts?: PrinterImageOptions) => void;
+    printImageBase64: (Base64: string, opts?: PrinterImageOptions) => Promise<void>;
     /**
      * Android print with encoder
      * @param text
      */
-    printRaw: (text: string) => void;
+    printRaw: (text: string) => Promise<void>;
     /**
      * `columnWidth`
      * 80mm => 46 character
      * 58mm => 30 character
      */
-    printColumnsText: (texts: string[], columnWidth: number[], columnAliment: (ColumnAliment)[], columnStyle?: string[], opts?: PrinterOptions) => void;
+    printColumnsText: (texts: string[], columnWidth: number[], columnAliment: (ColumnAliment)[], columnStyle?: string[], opts?: PrinterOptions) => Promise<void>;
 };
 declare const NetPrinterEventEmitter: NativeEventEmitter;
 export { COMMANDS, NetPrinter, BLEPrinter, USBPrinter, NetPrinterEventEmitter };
